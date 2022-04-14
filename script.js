@@ -1,9 +1,18 @@
 const gridContainer = document.querySelector('#container');
 const gridSize = document.querySelector('#gridSize');
-const colorPicker = document.querySelector('#colourPicker');
+const colorPicker = document.querySelector('#colorPicker');
+const rainbow = document.querySelector('#rainbow');
 const eraser = document.querySelector('#eraser');
 const clearAll = document.querySelector('#clearAll');
-const chosenColour = document.querySelector('#chosenColour');
+const chosenColor = document.querySelector('#chosenColor');
+
+//Default Color:
+let color = colorPicker.value;
+
+//Color Modes:
+let colorMode = 'color';
+let eraserMode = 'eraser';
+let rainbowMode = 'rainbow';
 
 //grid setup function
 let gridSetup = () => {
@@ -17,8 +26,8 @@ let gridSetup = () => {
         const square = document.createElement('div');
         square.classList.add('square');
 
-        square.addEventListener('mouseover', changeColour);
-        square.addEventListener('mousedown', changeColour);
+        square.addEventListener('mouseover', changeColor);
+        square.addEventListener('mousedown', changeColor);
         
         gridContainer.appendChild(square);
     }
@@ -30,11 +39,22 @@ document.body.onmousedown = () => (mouseDown = true);
 document.body.onmouseup = () => (mouseDown = false);
 
 //Change color function:
-let changeColour = (e) => {
+let changeColor = (e) => {
     if ((mouseDown == false)){
-        return
-    } 
-    e.target.style.backgroundColor = colour;
+        return;
+    } else if (colorMode == 'color' ){
+        color = colorPicker.value;
+    }else if (colorMode == 'eraser' ){
+        color = `white`;
+    }else if (colorMode == 'rainbow' ) {
+        const randomR = Math.floor(Math.random() * 256);
+        const randomG = Math.floor(Math.random() * 256);
+        const randomB = Math.floor(Math.random() * 256);
+        color = `rgb(${randomR},${randomG},${randomB})`;
+    } else {
+        
+    }
+    e.target.style.backgroundColor = color;
     
 };
 
@@ -43,6 +63,7 @@ let clearGrid = () => {
     container.innerHTML = '' ;
     gridSetup();
 }
+//clear grid event listener
 clearAll.addEventListener('click', clearGrid);
 
 //change grid size function
@@ -50,45 +71,46 @@ let changeGridSize = () => {
     container.innerHTML = '' ;
     gridSetup();
 }
+//grid size event listener
 gridSize.addEventListener('click', changeGridSize);
 
-//Colour Picker
-let colour = colourPicker.value;
-colourPicker.onchange = (e) => {
-    eraserMode = false; //por ahora
-    switchColour(e.target.value);
-
+//color Picker
+colorPicker.onchange = (e) => {
+    // eraserMode = false; 
+    switchColor(e.target.value);
 };
 
-let switchColour = () => {
-    if (eraserMode == true){
-        colour = 'white';
-    } else {
-        colour = colourPicker.value;
+//Color Mode switcher
+let colorModeSwitch = () => {
+    if (colorMode != 'color' ) {
+        colorMode = 'color';
     }
-
 }
 
-//Eraser Mode
-let eraserMode = false;
+//color button event listener
+chosenColor.addEventListener('click', colorModeSwitch);
 
+//Eraser Mode switcher
 let eraserModeSwitch = () => {
-    if (eraserMode == false ) {
-        eraserMode = true;
-    } else {
-        eraserMode = false;
+    if (colorMode != 'eraser' ) {
+        colorMode = 'eraser';
     }
-    switchColour();
 }
 
-
-
+//eraser button event listener
 eraser.addEventListener('click', eraserModeSwitch);
 
-//Chosen Color
-chosenColour.addEventListener('click', eraserModeSwitch);
+//Rainbow Mode switcher
+let rainbowModeSwitch = () => {
+    if (colorMode != 'rainbow' ) {
+        colorMode = 'rainbow';
+    }
+}
 
-//colourMode
+//rainbow button event listener
+rainbow.addEventListener('click', rainbowModeSwitch);
+
+
 
 
 //On startup:
