@@ -74,12 +74,6 @@ let changeGridSize = () => {
 //grid size event listener
 gridSize.addEventListener('click', changeGridSize);
 
-//color Picker
-colorPicker.onchange = (e) => {
-    // eraserMode = false; 
-    switchColor(e.target.value);
-};
-
 //Color Mode switcher
 let colorModeSwitch = () => {
     if (colorMode != 'color' ) {
