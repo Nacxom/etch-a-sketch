@@ -1,14 +1,9 @@
-
 const gridContainer = document.querySelector('#container');
 const gridSize = document.querySelector('#gridSize');
-
-
-
-//Behaviour with mousedown instead hover: 
-let mouseDown = false;
-document.body.onmousedown = () => (mouseDown = true);
-document.body.onmouseup = () => (mouseDown = false);
-
+const colorPicker = document.querySelector('#colourPicker');
+const eraser = document.querySelector('#eraser');
+const clearAll = document.querySelector('#clearAll');
+const chosenColour = document.querySelector('#chosenColour');
 
 //grid setup function
 let gridSetup = () => {
@@ -22,14 +17,20 @@ let gridSetup = () => {
         const square = document.createElement('div');
         square.classList.add('square');
 
-        square.addEventListener('mouseover', changeColor);
-        square.addEventListener('mousedown', changeColor)
+        square.addEventListener('mouseover', changeColour);
+        square.addEventListener('mousedown', changeColour);
         
         gridContainer.appendChild(square);
     }
 }
+
+//Behaviour with mousedown instead hover: 
+let mouseDown = false;
+document.body.onmousedown = () => (mouseDown = true);
+document.body.onmouseup = () => (mouseDown = false);
+
 //Change color function:
-let changeColor = (e) => {
+let changeColour = (e) => {
     if ((mouseDown == false)){
         return
     } 
@@ -37,18 +38,14 @@ let changeColor = (e) => {
     
 };
 
-
 //clear grid function
 let clearGrid = () => {
     container.innerHTML = '' ;
     gridSetup();
 }
-const clearAll = document.querySelector('#clearAll');
 clearAll.addEventListener('click', clearGrid);
 
-
 //change grid size function
-
 let changeGridSize = () => {
     container.innerHTML = '' ;
     gridSetup();
@@ -56,14 +53,42 @@ let changeGridSize = () => {
 gridSize.addEventListener('click', changeGridSize);
 
 //Colour Picker
-const colorPicker = document.querySelector('#colourPicker');
 let colour = colourPicker.value;
-colourPicker.onchange = (e) => changeColour(e.target.value);
-let changeColour = () => {
-    colour = colourPicker.value;
+colourPicker.onchange = (e) => {
+    eraserMode = false; //por ahora
+    switchColour(e.target.value);
+
+};
+
+let switchColour = () => {
+    if (eraserMode == true){
+        colour = 'white';
+    } else {
+        colour = colourPicker.value;
+    }
+
+}
+
+//Eraser Mode
+let eraserMode = false;
+
+let eraserModeSwitch = () => {
+    if (eraserMode == false ) {
+        eraserMode = true;
+    } else {
+        eraserMode = false;
+    }
+    switchColour();
 }
 
 
+
+eraser.addEventListener('click', eraserModeSwitch);
+
+//Chosen Color
+chosenColour.addEventListener('click', eraserModeSwitch);
+
+//colourMode
 
 
 //On startup:
