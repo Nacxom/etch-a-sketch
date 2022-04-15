@@ -19,7 +19,6 @@ header {
     "options gridSection"
     ;
 
-    grid-template-columns: ;
     justify-items: center;
 }
 
@@ -35,7 +34,7 @@ header {
 }
 
 .gridSection {
-    gird-area: gridSection;
+    grid-area: gridSection;
 
 }
 
