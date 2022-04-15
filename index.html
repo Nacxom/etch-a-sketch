@@ -13,25 +13,27 @@
         <h1>Etch-a-Sketch</h1>
     </header>
     <main>
-        <section>
-            <div class="options">
-                <h2>Grid Size:</h2>
+        <div class="main-wrapper">
+            <section class="options">
+                <h2 class="sizeText">Grid Size: 16 * 16</h2>
                 <div class="slideContainer">
                     <input type="range" min="1" max="100" value="16" class="slider" id="gridSize">
-                  </div>
-                  <input id="colorPicker" type="color" value="#000000" />
+                </div>
+                <input id="colorPicker" type="color" value="#000000" />
+                <button id="chosenColor">Chosen Color</button>
+                <button id="rainbow">Rainbow</button>
+                <button id="eraser">Eraser</button>
+                <button id="clearAll">Clear All</button>
 
-                  <button id="chosenColor">Chosen Color</button>
-                  <button id="rainbow">Rainbow Mode</button>
-                  <button id="eraser">Eraser</button>
-                  <button id="clearAll">Clear All</button>
-            </div>
-        </section>
-        <section class="gridSection">
-            <div id="container">
-
-            </div>
-        </section>
+            </section>
+            <section class="gridSection">
+                
+                <div id="container">
+    
+                </div>
+            </section>
+        </div>
+        
     </main>
     <footer>
 

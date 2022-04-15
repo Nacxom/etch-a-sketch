@@ -4,10 +4,42 @@
     box-sizing: border-box;
     
 }
-
 body {
-    background-color: gray;
+    background-color: rgb(255, 197, 122);
 }
+header {
+    text-align: center;
+    padding: 40px;
+}
+
+.main-wrapper {
+    display: grid;
+
+    grid-template-areas:
+    "options gridSection"
+    ;
+
+    grid-template-columns: ;
+    justify-items: center;
+}
+
+.options {
+    grid-area: options;
+
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+
+    padding: 10px 30px;
+    background-color: grey;
+}
+
+.gridSection {
+    gird-area: gridSection;
+
+}
+
+
 #container{
     width: 500px;
     height: 500px;

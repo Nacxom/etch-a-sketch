@@ -5,6 +5,7 @@ const rainbow = document.querySelector('#rainbow');
 const eraser = document.querySelector('#eraser');
 const clearAll = document.querySelector('#clearAll');
 const chosenColor = document.querySelector('#chosenColor');
+const sizeText = document.querySelector('.sizeText');
 
 //Default Color:
 let color = colorPicker.value;
@@ -15,6 +16,7 @@ let eraserMode = 'eraser';
 let rainbowMode = 'rainbow';
 
 //grid setup function
+let size = gridSize.value;
 let gridSetup = () => {
     size = gridSize.value;
 
@@ -70,6 +72,7 @@ clearAll.addEventListener('click', clearGrid);
 let changeGridSize = () => {
     container.innerHTML = '' ;
     gridSetup();
+    showSizeText();
 }
 //grid size event listener
 gridSize.addEventListener('click', changeGridSize);
@@ -104,6 +107,11 @@ let rainbowModeSwitch = () => {
 //rainbow button event listener
 rainbow.addEventListener('click', rainbowModeSwitch);
 
+
+//Show grid Size:
+let showSizeText = () => {
+    sizeText.textContent = `Grid Size: ${size} * ${size}`;
+}
 
 
 
